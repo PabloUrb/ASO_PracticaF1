@@ -27,7 +27,10 @@ static unsigned int numberPresses = 0;  ///< For information, store the number o
 static bool	    ledOn = 0;          ///< Is the LED on or off? Used to invert its state (off by default)
 
 /// Function prototype for the custom IRQ handler function -- see below for the implementation
-static irq_handler_t  ebbgpio_irq_handler(unsigned int irq, void *dev_id, struct pt_regs *regs);
+static irq_handler_t  ebbgpio_irq_handler1(unsigned int irq, void *dev_id, struct pt_regs *regs);
+static irq_handler_t  ebbgpio_irq_handler2(unsigned int irq, void *dev_id, struct pt_regs *regs);
+static irq_handler_t  ebbgpio_irq_handler3(unsigned int irq, void *dev_id, struct pt_regs *regs);
+static irq_handler_t  ebbgpio_irq_handler4(unsigned int irq, void *dev_id, struct pt_regs *regs);
 
 /** @brief The LKM initialization function
  *  The static keyword restricts the visibility of the function to within this C file. The __init
