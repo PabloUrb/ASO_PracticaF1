@@ -48,7 +48,7 @@ static irq_handler_t  ebbgpio_irq_handler4(unsigned int irq, void *dev_id, struc
  *  function sets up the GPIOs and the IRQ
  *  @return returns 0 if successful
  */
- static int __init ebbgpio_init(void){
+ static int __init ebbgpio_init1(void){
     int result = 0;
     printk(KERN_INFO "GPIO_TEST: Initializing the GPIO_TEST LKM\n");
     // Is the GPIO a valid GPIO number (e.g., the BBB has 4x32 but not all available)
@@ -86,7 +86,7 @@ static irq_handler_t  ebbgpio_irq_handler4(unsigned int irq, void *dev_id, struc
     return result;
  }
 
- static int __init ebbgpio_init(void){
+ static int __init ebbgpio_init2(void){
     int result = 0;
     printk(KERN_INFO "GPIO_TEST: Initializing the GPIO_TEST LKM\n");
     // Is the GPIO a valid GPIO number (e.g., the BBB has 4x32 but not all available)
@@ -124,7 +124,7 @@ static irq_handler_t  ebbgpio_irq_handler4(unsigned int irq, void *dev_id, struc
     return result;
  }
 
- static int __init ebbgpio_init(void){
+ static int __init ebbgpio_init3(void){
     int result = 0;
     printk(KERN_INFO "GPIO_TEST: Initializing the GPIO_TEST LKM\n");
     // Is the GPIO a valid GPIO number (e.g., the BBB has 4x32 but not all available)
@@ -162,7 +162,7 @@ static irq_handler_t  ebbgpio_irq_handler4(unsigned int irq, void *dev_id, struc
     return result;
  }
 
- static int __init ebbgpio_init(void){
+ static int __init ebbgpio_init4(void){
     int result = 0;
     printk(KERN_INFO "GPIO_TEST: Initializing the GPIO_TEST LKM\n");
     // Is the GPIO a valid GPIO number (e.g., the BBB has 4x32 but not all available)
@@ -290,7 +290,10 @@ static irq_handler_t ebbgpio_irq_handler4(unsigned int irq, void *dev_id, struct
 
 /// This next calls are  mandatory -- they identify the initialization function
 /// and the cleanup function (as above).
-module_init(ebbgpio_init);
+module_init(ebbgpio_init1);
+module_init(ebbgpio_init2);
+module_init(ebbgpio_init3);
+module_init(ebbgpio_init4);
 module_exit(ebbgpio_exit1);
 module_exit(ebbgpio_exit2);
 module_exit(ebbgpio_exit3);
