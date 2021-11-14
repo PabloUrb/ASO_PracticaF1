@@ -2,7 +2,7 @@ obj-m := fase1.o
 
 TARGET_MODULE:=simple_module
 
-ifneq ($(KERNELRELEASE),) 
+ifneq ($(KERNELRELEASE),)
 	$(TARGET_MODULE)-objs := fase1.o
 	obj-m := $(TARGET_MODULE).o
 else
