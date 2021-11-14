@@ -58,7 +58,7 @@ static irq_handler_t  ebbgpio_irq_handler4(unsigned int irq, void *dev_id, struc
     }
     // Going to set up the LED. It is a GPIO in output mode and will be on by default
     ledOn = true;
-    gpio_request(gpioLED, "sysfs");          // gpioLED is hardcoded to 49, request it
+    gpio_request(gpioLED1, "sysfs");          // gpioLED is hardcoded to 49, request it
     gpio_direction_output(gpioLED1, ledOn);   // Set the gpio to be in output mode and on
  // gpio_set_value(gpioLED, ledOn);          // Not required as set by line above (here for reference)
     gpio_export(gpioLED1, false);             // Causes gpio49 to appear in /sys/class/gpio
