@@ -291,9 +291,6 @@ static irq_handler_t ebbgpio_irq_handler4(unsigned int irq, void *dev_id, struct
 /// This next calls are  mandatory -- they identify the initialization function
 /// and the cleanup function (as above).
 module_init(ebbgpio_init1);
-module_init(ebbgpio_init2);
-module_init(ebbgpio_init3);
-module_init(ebbgpio_init4);
 module_exit(ebbgpio_exit1);
 module_exit(ebbgpio_exit2);
 module_exit(ebbgpio_exit3);
