@@ -90,7 +90,7 @@ static irq_handler_t  ebbgpio_irq_handler4(unsigned int irq, void *dev_id, struc
  *  code is used for a built-in driver (not a LKM) that this function is not required. Used to release the
  *  GPIOs and display cleanup messages.
  */
-static void __exit ebbgpio_exit(void){
+static void __exit ebbgpio_exit1(void){
    printk(KERN_INFO "GPIO_TEST: The button state is currently: %d\n", gpio_get_value(gpioButton1));
    printk(KERN_INFO "GPIO_TEST: The button was pressed %d times\n", numberPresses);
    gpio_set_value(gpioLED1, 0);              // Turn the LED off, makes it clear the device was unloaded
@@ -101,7 +101,7 @@ static void __exit ebbgpio_exit(void){
    gpio_free(gpioButton1);                   // Free the Button GPIO
    printk(KERN_INFO "GPIO_TEST: Goodbye from the LKM!\n");
 }
-static void __exit ebbgpio_exit(void){
+static void __exit ebbgpio_exit2(void){
    printk(KERN_INFO "GPIO_TEST: The button state is currently: %d\n", gpio_get_value(gpioButton2));
    printk(KERN_INFO "GPIO_TEST: The button was pressed %d times\n", numberPresses);
    gpio_set_value(gpioLED1, 0);              // Turn the LED off, makes it clear the device was unloaded
@@ -112,7 +112,7 @@ static void __exit ebbgpio_exit(void){
    gpio_free(gpioButton2);                   // Free the Button GPIO
    printk(KERN_INFO "GPIO_TEST: Goodbye from the LKM!\n");
 }
-static void __exit ebbgpio_exit(void){
+static void __exit ebbgpio_exit3(void){
    printk(KERN_INFO "GPIO_TEST: The button state is currently: %d\n", gpio_get_value(gpioButton3));
    printk(KERN_INFO "GPIO_TEST: The button was pressed %d times\n", numberPresses);
    gpio_set_value(gpioLED2, 0);              // Turn the LED off, makes it clear the device was unloaded
@@ -123,7 +123,7 @@ static void __exit ebbgpio_exit(void){
    gpio_free(gpioButton3);                   // Free the Button GPIO
    printk(KERN_INFO "GPIO_TEST: Goodbye from the LKM!\n");
 }
-static void __exit ebbgpio_exit(void){
+static void __exit ebbgpio_exit4(void){
    printk(KERN_INFO "GPIO_TEST: The button state is currently: %d\n", gpio_get_value(gpioButton4));
    printk(KERN_INFO "GPIO_TEST: The button was pressed %d times\n", numberPresses);
    gpio_set_value(gpioLED2, 0);              // Turn the LED off, makes it clear the device was unloaded
@@ -145,28 +145,28 @@ static void __exit ebbgpio_exit(void){
  *  @param regs   h/w specific register values -- only really ever used for debugging.
  *  return returns IRQ_HANDLED if successful -- should return IRQ_NONE otherwise.
  */
-static irq_handler_t ebbgpio_irq_handler(unsigned int irq, void *dev_id, struct pt_regs *regs){
+static irq_handler_t ebbgpio_irq_handler1(unsigned int irq, void *dev_id, struct pt_regs *regs){
    ledOn = !ledOn;                          // Invert the LED state on each button press
    gpio_set_value(gpioLED1, ledOn);          // Set the physical LED accordingly
    printk(KERN_INFO "GPIO_TEST: Interrupt! (button state is %d)\n", gpio_get_value(gpioButton1));
    numberPresses++;                         // Global counter, will be outputted when the module is unloaded
    return (irq_handler_t) IRQ_HANDLED;      // Announce that the IRQ has been handled correctly
 }
-static irq_handler_t ebbgpio_irq_handler(unsigned int irq, void *dev_id, struct pt_regs *regs){
+static irq_handler_t ebbgpio_irq_handler2(unsigned int irq, void *dev_id, struct pt_regs *regs){
    ledOn = !ledOn;                          // Invert the LED state on each button press
    gpio_set_value(gpioLED2, ledOn);          // Set the physical LED accordingly
    printk(KERN_INFO "GPIO_TEST: Interrupt! (button state is %d)\n", gpio_get_value(gpioButton3));
    numberPresses++;                         // Global counter, will be outputted when the module is unloaded
    return (irq_handler_t) IRQ_HANDLED;      // Announce that the IRQ has been handled correctly
 }
-static irq_handler_t ebbgpio_irq_handler(unsigned int irq, void *dev_id, struct pt_regs *regs){
+static irq_handler_t ebbgpio_irq_handler3(unsigned int irq, void *dev_id, struct pt_regs *regs){
    ledOff = !ledOff;                          // Invert the LED state on each button press
    gpio_set_value(gpioLED1, ledOff);          // Set the physical LED accordingly
    printk(KERN_INFO "GPIO_TEST: Interrupt! (button state is %d)\n", gpio_get_value(gpioButton2));
    numberPresses++;                         // Global counter, will be outputted when the module is unloaded
    return (irq_handler_t) IRQ_HANDLED;      // Announce that the IRQ has been handled correctly
 }
-static irq_handler_t ebbgpio_irq_handler(unsigned int irq, void *dev_id, struct pt_regs *regs){
+static irq_handler_t ebbgpio_irq_handler4(unsigned int irq, void *dev_id, struct pt_regs *regs){
    ledOff = !ledOff;                          // Invert the LED state on each button press
    gpio_set_value(gpioLED2, ledOff);          // Set the physical LED accordingly
    printk(KERN_INFO "GPIO_TEST: Interrupt! (button state is %d)\n", gpio_get_value(gpioButton4));
