@@ -28,9 +28,9 @@ static unsigned int gpioButton2 = 115;
 static unsigned int gpioButton3 = 115;
 static unsigned int gpioButton4 = 115;   ///< hard coding the button gpio for this example to P9_27 (GPIO115)
 static unsigned int irqNumber1;           ///< Used to share the IRQ number within this file
-static unsigned int irqNumber2;           ///< Used to share the IRQ number within this file
-static unsigned int irqNumber3;           ///< Used to share the IRQ number within this file
-static unsigned int irqNumber4;           ///< Used to share the IRQ number within this file
+//static unsigned int irqNumber2;           ///< Used to share the IRQ number within this file
+//static unsigned int irqNumber3;           ///< Used to share the IRQ number within this file
+//static unsigned int irqNumber4;           ///< Used to share the IRQ number within this file
 static unsigned int numberPresses = 0;  ///< For information, store the number of button presses
 static bool	    ledOn = 0;          ///< Is the LED on or off? Used to invert its state (off by default)
 static bool	    ledOff = 0;          ///< Is the LED on or off? Used to invert its state (off by default)
@@ -153,7 +153,7 @@ static irq_handler_t ebbgpio_irq_handler1(unsigned int irq, void *dev_id, struct
    numberPresses++;                         // Global counter, will be outputted when the module is unloaded
    return (irq_handler_t) IRQ_HANDLED;      // Announce that the IRQ has been handled correctly
 }
-static irq_handler_t ebbgpio_irq_handler2(unsigned int irq, void *dev_id, struct pt_regs *regs){
+/*static irq_handler_t ebbgpio_irq_handler2(unsigned int irq, void *dev_id, struct pt_regs *regs){
    ledOn = !ledOn;                          // Invert the LED state on each button press
    gpio_set_value(gpioLED2, ledOn);          // Set the physical LED accordingly
    printk(KERN_INFO "GPIO_TEST: Interrupt! (button state is %d)\n", gpio_get_value(gpioButton3));
@@ -173,7 +173,7 @@ static irq_handler_t ebbgpio_irq_handler4(unsigned int irq, void *dev_id, struct
    printk(KERN_INFO "GPIO_TEST: Interrupt! (button state is %d)\n", gpio_get_value(gpioButton4));
    numberPresses++;                         // Global counter, will be outputted when the module is unloaded
    return (irq_handler_t) IRQ_HANDLED;      // Announce that the IRQ has been handled correctly
-}
+}*/
 
 /// This next calls are  mandatory -- they identify the initialization function
 /// and the cleanup function (as above).
