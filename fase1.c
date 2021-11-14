@@ -179,6 +179,3 @@ static irq_handler_t ebbgpio_irq_handler4(unsigned int irq, void *dev_id, struct
 /// and the cleanup function (as above).
 module_init(ebbgpio_init);
 module_exit(ebbgpio_exit1);
-module_exit(ebbgpio_exit2);
-module_exit(ebbgpio_exit3);
-module_exit(ebbgpio_exit4);
