@@ -37,9 +37,9 @@ static bool	    ledOff = 0;          ///< Is the LED on or off? Used to invert i
 
 /// Function prototype for the custom IRQ handler function -- see below for the implementation
 static irq_handler_t  ebbgpio_irq_handler1(unsigned int irq, void *dev_id, struct pt_regs *regs);
-static irq_handler_t  ebbgpio_irq_handler2(unsigned int irq, void *dev_id, struct pt_regs *regs);
-static irq_handler_t  ebbgpio_irq_handler3(unsigned int irq, void *dev_id, struct pt_regs *regs);
-static irq_handler_t  ebbgpio_irq_handler4(unsigned int irq, void *dev_id, struct pt_regs *regs);
+//static irq_handler_t  ebbgpio_irq_handler2(unsigned int irq, void *dev_id, struct pt_regs *regs);
+//static irq_handler_t  ebbgpio_irq_handler3(unsigned int irq, void *dev_id, struct pt_regs *regs);
+//static irq_handler_t  ebbgpio_irq_handler4(unsigned int irq, void *dev_id, struct pt_regs *regs);
 
 /** @brief The LKM initialization function
  *  The static keyword restricts the visibility of the function to within this C file. The __init
@@ -101,7 +101,7 @@ static void __exit ebbgpio_exit1(void){
    gpio_free(gpioLED1);                      // Free the LED GPIO
    gpio_free(gpioButton1);                   // Free the Button GPIO
    printk(KERN_INFO "GPIO_TEST: Goodbye from the LKM!\n");
-}
+}/*
 static void __exit ebbgpio_exit2(void){
    printk(KERN_INFO "GPIO_TEST: The button state is currently: %d\n", gpio_get_value(gpioButton2));
    printk(KERN_INFO "GPIO_TEST: The button was pressed %d times\n", numberPresses);
@@ -135,7 +135,7 @@ static void __exit ebbgpio_exit4(void){
    gpio_free(gpioButton4);                   // Free the Button GPIO
    printk(KERN_INFO "GPIO_TEST: Goodbye from the LKM!\n");
 }
-
+*/
 /** @brief The GPIO IRQ Handler function
  *  This function is a custom interrupt handler that is attached to the GPIO above. The same interrupt
  *  handler cannot be invoked concurrently as the interrupt line is masked out until the function is complete.
