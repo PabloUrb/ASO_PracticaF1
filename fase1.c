@@ -85,7 +85,6 @@ static irq_handler_t  ebbgpio_irq_handler4(unsigned int irq, void *dev_id, struc
     printk(KERN_INFO "GPIO_TEST: The interrupt request result is: %d\n", result);
     return result;
  }
-
  static int __init ebbgpio_init2(void){
     int result = 0;
     printk(KERN_INFO "GPIO_TEST: Initializing the GPIO_TEST LKM\n");
@@ -123,7 +122,6 @@ static irq_handler_t  ebbgpio_irq_handler4(unsigned int irq, void *dev_id, struc
     printk(KERN_INFO "GPIO_TEST: The interrupt request result is: %d\n", result);
     return result;
  }
-
  static int __init ebbgpio_init3(void){
     int result = 0;
     printk(KERN_INFO "GPIO_TEST: Initializing the GPIO_TEST LKM\n");
@@ -161,7 +159,6 @@ static irq_handler_t  ebbgpio_irq_handler4(unsigned int irq, void *dev_id, struc
     printk(KERN_INFO "GPIO_TEST: The interrupt request result is: %d\n", result);
     return result;
  }
-
  static int __init ebbgpio_init4(void){
     int result = 0;
     printk(KERN_INFO "GPIO_TEST: Initializing the GPIO_TEST LKM\n");
@@ -199,11 +196,7 @@ static irq_handler_t  ebbgpio_irq_handler4(unsigned int irq, void *dev_id, struc
     printk(KERN_INFO "GPIO_TEST: The interrupt request result is: %d\n", result);
     return result;
  }
-/** @brief The LKM cleanup function
- *  Similar to the initialization function, it is static. The __exit macro notifies that if this
- *  code is used for a built-in driver (not a LKM) that this function is not required. Used to release the
- *  GPIOs and display cleanup messages.
- */
+
 static void __exit ebbgpio_exit1(void){
    printk(KERN_INFO "GPIO_TEST: The button state is currently: %d\n", gpio_get_value(gpioButton1));
    printk(KERN_INFO "GPIO_TEST: The button was pressed %d times\n", numberPresses);
@@ -249,16 +242,7 @@ static void __exit ebbgpio_exit4(void){
    printk(KERN_INFO "GPIO_TEST: Goodbye from the LKM!\n");
 }
 
-/** @brief The GPIO IRQ Handler function
- *  This function is a custom interrupt handler that is attached to the GPIO above. The same interrupt
- *  handler cannot be invoked concurrently as the interrupt line is masked out until the function is complete.
- *  This function is static as it should not be invoked directly from outside of this file.
- *  @param irq    the IRQ number that is associated with the GPIO -- useful for logging.
- *  @param dev_id the *dev_id that is provided -- can be used to identify which device caused the interrupt
- *  Not used in this example as NULL is passed.
- *  @param regs   h/w specific register values -- only really ever used for debugging.
- *  return returns IRQ_HANDLED if successful -- should return IRQ_NONE otherwise.
- */
+
 static irq_handler_t ebbgpio_irq_handler1(unsigned int irq, void *dev_id, struct pt_regs *regs){
    ledOn = !ledOn;                          // Invert the LED state on each button press
    gpio_set_value(gpioLED1, ledOn);          // Set the physical LED accordingly
@@ -288,9 +272,10 @@ static irq_handler_t ebbgpio_irq_handler4(unsigned int irq, void *dev_id, struct
    return (irq_handler_t) IRQ_HANDLED;      // Announce that the IRQ has been handled correctly
 }
 
-/// This next calls are  mandatory -- they identify the initialization function
-/// and the cleanup function (as above).
 module_init(ebbgpio_init1);
+module_init(ebbgpio_init2);
+module_init(ebbgpio_init3);
+module_init(ebbgpio_init4);
 module_exit(ebbgpio_exit1);
 module_exit(ebbgpio_exit2);
 module_exit(ebbgpio_exit3);
