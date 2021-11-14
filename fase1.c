@@ -33,6 +33,7 @@ static unsigned int irqNumber3;           ///< Used to share the IRQ number with
 static unsigned int irqNumber4;           ///< Used to share the IRQ number within this file
 static unsigned int numberPresses = 0;  ///< For information, store the number of button presses
 static bool	    ledOn = 0;          ///< Is the LED on or off? Used to invert its state (off by default)
+static bool	    ledOff = 0;          ///< Is the LED on or off? Used to invert its state (off by default)
 
 /// Function prototype for the custom IRQ handler function -- see below for the implementation
 static irq_handler_t  ebbgpio_irq_handler1(unsigned int irq, void *dev_id, struct pt_regs *regs);
@@ -176,5 +177,11 @@ static irq_handler_t ebbgpio_irq_handler4(unsigned int irq, void *dev_id, struct
 
 /// This next calls are  mandatory -- they identify the initialization function
 /// and the cleanup function (as above).
-module_init(ebbgpio_init);
-module_exit(ebbgpio_exit);
+module_init(ebbgpio_init1);
+module_init(ebbgpio_init2);
+module_init(ebbgpio_init3);
+module_init(ebbgpio_init4);
+module_exit(ebbgpio_exit1);
+module_exit(ebbgpio_exit2);
+module_exit(ebbgpio_exit3);
+module_exit(ebbgpio_exit4);
