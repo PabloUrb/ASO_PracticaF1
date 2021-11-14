@@ -193,7 +193,7 @@ static irq_handler_t  ebbgpio_irq_handler4(unsigned int irq, void *dev_id, struc
     result = request_irq(irqNumber4,             // The interrupt number requested
                          (irq_handler_t) ebbgpio_irq_handler4, // The pointer to the handler function below
                          IRQF_TRIGGER_RISING,   // Interrupt on rising edge (button press, not release)
-                         "ebb_gpio_handler",    // Used in /proc/interrupts to identify the owner
+                         "ebb_gpio_handler4",    // Used in /proc/interrupts to identify the owner
                          NULL);                 // The *dev_id for shared interrupt lines, NULL is okay
 
     printk(KERN_INFO "GPIO_TEST: The interrupt request result is: %d\n", result);
