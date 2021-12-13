@@ -65,11 +65,11 @@ static int __init ebbgpio_init(void){
    printk(KERN_INFO "GPIO_TEST: The button state is currently: %d\n", gpio_get_value(gpioButton1));
 
    // GPIO numbers and IRQ numbers are not the same! This function performs the mapping for us
-   irqNumber = gpio_to_irq(gpioButton1);
-   printk(KERN_INFO "GPIO_TEST: The button is mapped to IRQ: %d\n", irqNumber);
+   irqNumber1 = gpio_to_irq(gpioButton1);
+   printk(KERN_INFO "GPIO_TEST: The button is mapped to IRQ: %d\n", irqNumber1);
 
    // This next call requests an interrupt line
-   result = request_irq(irqNumber,             // The interrupt number requested
+   result = request_irq(irqNumber1,             // The interrupt number requested
                         (irq_handler_t) ebbgpio_irq_handler, // The pointer to the handler function below
                         IRQF_TRIGGER_RISING,   // Interrupt on rising edge (button press, not release)
                         "ebb_gpio_handler",    // Used in /proc/interrupts to identify the owner
