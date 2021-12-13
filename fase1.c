@@ -70,7 +70,7 @@ static int __init ebbgpio_init(void){
 
    // This next call requests an interrupt line
    result = request_irq(irqNumber1,             // The interrupt number requested
-                        (irq_handler_t) ebbgpio_irq_handler, // The pointer to the handler function below
+                        (irq_handler_t) ebbgpio_irq_handler1, // The pointer to the handler function below
                         IRQF_TRIGGER_RISING,   // Interrupt on rising edge (button press, not release)
                         "ebb_gpio_handler",    // Used in /proc/interrupts to identify the owner
                         NULL);                 // The *dev_id for shared interrupt lines, NULL is okay
@@ -89,7 +89,7 @@ static void __exit ebbgpio_exit(void){
    printk(KERN_INFO "GPIO_TEST: The button was pressed %d times\n", numberPresses);
    gpio_set_value(gpioLED1, 0);              // Turn the LED off, makes it clear the device was unloaded
    gpio_unexport(gpioLED1);                  // Unexport the LED GPIO
-   free_irq(irqNumber, NULL);               // Free the IRQ number, no *dev_id required in this case
+   free_irq(irqNumber1, NULL);               // Free the IRQ number, no *dev_id required in this case
    gpio_unexport(gpioButton1);               // Unexport the Button GPIO
    gpio_free(gpioLED1);                      // Free the LED GPIO
    gpio_free(gpioButton1);                   // Free the Button GPIO
@@ -106,7 +106,7 @@ static void __exit ebbgpio_exit(void){
  *  @param regs   h/w specific register values -- only really ever used for debugging.
  *  return returns IRQ_HANDLED if successful -- should return IRQ_NONE otherwise.
  */
-static irq_handler_t ebbgpio_irq_handler(unsigned int irq, void *dev_id, struct pt_regs *regs){
+static irq_handler_t ebbgpio_irq_handler1(unsigned int irq, void *dev_id, struct pt_regs *regs){
    ledOn = !ledOn;                          // Invert the LED state on each button press
    gpio_set_value(gpioLED1, ledOn);          // Set the physical LED accordingly
    printk(KERN_INFO "GPIO_TEST: Interrupt! (button state is %d)\n", gpio_get_value(gpioButton1));
