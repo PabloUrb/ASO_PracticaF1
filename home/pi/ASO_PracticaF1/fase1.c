@@ -137,10 +137,10 @@ static int __init ebbgpio_init(void){
  */
 static void __exit ebbgpio_exit(void){
    printk(KERN_INFO "GPIO_TEST: The button state is currently: %d\n", gpio_get_value(gpioButton1));
-   printk(KERN_INFO "GPIO_TEST: The button was pressed %d times\n", numberPresses1);
-   printk(KERN_INFO "GPIO_TEST: The button was pressed %d times\n", numberPresses2);
-   printk(KERN_INFO "GPIO_TEST: The button was pressed %d times\n", numberPresses3);
-   printk(KERN_INFO "GPIO_TEST: The button was pressed %d times\n", numberPresses4);
+   printk(KERN_INFO "GPIO_TEST: The button1 was pressed %d times\n", numberPresses1);
+   printk(KERN_INFO "GPIO_TEST: The button2 was pressed %d times\n", numberPresses2);
+   printk(KERN_INFO "GPIO_TEST: The button3 was pressed %d times\n", numberPresses3);
+   printk(KERN_INFO "GPIO_TEST: The button4 was pressed %d times\n", numberPresses4);
    gpio_set_value(gpioLED1, 0);              // Turn the LED off, makes it clear the device was unloaded
    gpio_set_value(gpioLED2, 0);              // Turn the LED off, makes it clear the device was unloaded
 
