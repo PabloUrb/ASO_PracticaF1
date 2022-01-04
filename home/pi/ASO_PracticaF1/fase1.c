@@ -14,7 +14,7 @@ MODULE_AUTHOR("Derek Molloy");
 MODULE_DESCRIPTION("A Button/LED test driver for the BBB");
 MODULE_VERSION("0.1");
 
-static unsigned int gpioLED1 = 20; 
+static unsigned int gpioLED1 = 20;
 static unsigned int gpioLED2 = 16;       ///< hard coding the LED gpio for this example to P9_23 (GPIO49)
 static unsigned int gpioButton1 = 21;
 static unsigned int gpioButton2 = 13;
@@ -24,7 +24,10 @@ static unsigned int irqNumber1;           ///< Used to share the IRQ number with
 static unsigned int irqNumber2;           ///< Used to share the IRQ number within this file
 static unsigned int irqNumber3;           ///< Used to share the IRQ number within this file
 static unsigned int irqNumber4;           ///< Used to share the IRQ number within this file
-static unsigned int numberPresses = 0;  ///< For information, store the number of button presses
+static unsigned int numberPresses1 = 0;
+static unsigned int numberPresses2 = 0;
+static unsigned int numberPresses3 = 0;
+static unsigned int numberPresses4 = 0;  ///< For information, store the number of button presses
 static bool ledOn = 0;          ///< Is the LED on or off? Used to invert its state (off by default)
 static bool ledOff = 0;          ///< Is the LED on or off? Used to invert its state (off by default)
 
@@ -134,7 +137,10 @@ static int __init ebbgpio_init(void){
  */
 static void __exit ebbgpio_exit(void){
    printk(KERN_INFO "GPIO_TEST: The button state is currently: %d\n", gpio_get_value(gpioButton1));
-   printk(KERN_INFO "GPIO_TEST: The button was pressed %d times\n", numberPresses);
+   printk(KERN_INFO "GPIO_TEST: The button was pressed %d times\n", numberPresses1);
+   printk(KERN_INFO "GPIO_TEST: The button was pressed %d times\n", numberPresses2);
+   printk(KERN_INFO "GPIO_TEST: The button was pressed %d times\n", numberPresses3);
+   printk(KERN_INFO "GPIO_TEST: The button was pressed %d times\n", numberPresses4);
    gpio_set_value(gpioLED1, 0);              // Turn the LED off, makes it clear the device was unloaded
    gpio_set_value(gpioLED2, 0);              // Turn the LED off, makes it clear the device was unloaded
 
@@ -175,28 +181,28 @@ static irq_handler_t ebbgpio_irq_handler1(unsigned int irq, void *dev_id, struct
    ledOn = ledOn;                          // Invert the LED state on each button press
    gpio_set_value(gpioLED1, ledOn);          // Set the physical LED accordingly
    printk(KERN_INFO "GPIO_TEST: Interrupt! (button state is %d)\n", gpio_get_value(gpioButton1));
-   numberPresses++;                         // Global counter, will be outputted when the module is unloaded
+   numberPresses1++;                         // Global counter, will be outputted when the module is unloaded
    return (irq_handler_t) IRQ_HANDLED;      // Announce that the IRQ has been handled correctly
 }
 static irq_handler_t ebbgpio_irq_handler2(unsigned int irq, void *dev_id, struct pt_regs *regs){
    ledOff = ledOff;                          // Invert the LED state on each button press
    gpio_set_value(gpioLED1, ledOff);          // Set the physical LED accordingly
    printk(KERN_INFO "GPIO_TEST: Interrupt! (button state is %d)\n", gpio_get_value(gpioButton2));
-   numberPresses++;                         // Global counter, will be outputted when the module is unloaded
+   numberPresses2++;                         // Global counter, will be outputted when the module is unloaded
    return (irq_handler_t) IRQ_HANDLED;      // Announce that the IRQ has been handled correctly
 }
 static irq_handler_t ebbgpio_irq_handler3(unsigned int irq, void *dev_id, struct pt_regs *regs){
    ledOn = ledOn;                          // Invert the LED state on each button press
    gpio_set_value(gpioLED2, ledOn);          // Set the physical LED accordingly
    printk(KERN_INFO "GPIO_TEST: Interrupt! (button state is %d)\n", gpio_get_value(gpioButton3));
-   numberPresses++;                         // Global counter, will be outputted when the module is unloaded
+   numberPresses3++;                         // Global counter, will be outputted when the module is unloaded
    return (irq_handler_t) IRQ_HANDLED;      // Announce that the IRQ has been handled correctly
 }
 static irq_handler_t ebbgpio_irq_handler4(unsigned int irq, void *dev_id, struct pt_regs *regs){
    ledOff = ledOff;                          // Invert the LED state on each button press
    gpio_set_value(gpioLED2, ledOff);          // Set the physical LED accordingly
    printk(KERN_INFO "GPIO_TEST: Interrupt! (button state is %d)\n", gpio_get_value(gpioButton4));
-   numberPresses++;                         // Global counter, will be outputted when the module is unloaded
+   numberPresses4++;                         // Global counter, will be outputted when the module is unloaded
    return (irq_handler_t) IRQ_HANDLED;      // Announce that the IRQ has been handled correctly
 }
 /// This next calls are  mandatory -- they identify the initialization function
