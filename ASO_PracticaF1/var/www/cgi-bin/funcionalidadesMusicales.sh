@@ -10,6 +10,7 @@ echo -e "<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Strict//EN"
 <body>
 "
 echo -e '<h1>Funcionalidades Musicales</h1>'
+logger ASO: Entrada funcionalidades Musicales
 var=`find /home/pi/playlist | tail -n +2  | awk '{printf "%s. ",NR;print; printf "<form action=\"./musicControls.sh\" method=\"post\" ENCTYPE=\"text/plain\" style=\"display:inline-block\"><input type=\"submit\" name=\"Replay-%s\" value=\"Replay\"></form></br>",NR }'`
 echo "<script type=\"text/javascript\">
 function getCookie(cname) {
