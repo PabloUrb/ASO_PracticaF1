@@ -1,0 +1,55 @@
+#!/bin/bash
+
+# Directorio destino
+DIR=/var/www/html
+
+# Nombre de archivo HTML a generar
+ARCHIVO=monitor.html
+
+# Fecha actual
+FECHA=$(date +'%d/%m/%Y %H:%M:%S')
+
+# Declaración de la función
+EstadoServicio() {
+    systemctl --quiet is-active $1
+    if [ $? -eq 0 ]; then
+        echo "<p>El servicio $1 está <span class='encendido'> ejecutándose</span>.</p>" >> $DIR/$ARCHIVO
+    else
+        echo "<p>El servicio $1 está <span class='detenido'> detenido</span>.</p>" >> $DIR/$ARCHIVO
+    fi
+}
+
+# Comienzo de la generación del archivo HTML
+# Esta primera parte constitute el esqueleto básico del mismo.
+echo "
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+  <meta charset='UTF-8'>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+  <meta http-equiv='X-UA-Compatible' content='ie=edge'>
+  <title>Monitor de servicios seleccionados del sistema</title>
+  <link rel='stylesheet' href='estilos.css'>
+</head>
+<body>
+<h1>Monitor de servicios seleccionados del sistema</h1>
+<p id='ultact'>Última actualización: $FECHA</p>
+<hr>
+" > $DIR/$ARCHIVO
+
+# Servicios a chequear (podemos agregar todos los que deseemos
+# El servidor web Apache
+EstadoServicio httpd
+# El firewall utilizado por defecto en CentOS 7
+EstadoServicio firewalld
+# Un servicio cualquiera
+EstadoServicio miservicio
+# El servidor de bases de datos
+EstadoServicio mariadb
+# sshd
+EstadoServicio sshd
+
+# Finalmente, terminamos de escribir el archivo
+echo "
+</body>
+</html>" >> $DIR/$ARCHIVO

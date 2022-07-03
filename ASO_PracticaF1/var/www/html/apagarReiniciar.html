@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Strict//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title> Pagina Web d'ADS </title>
+</head>
+<body>
+<h3>Apagar - Reiniciar</h3>
+<script type="text/javascript">
+function getCookie(cname) {
+  var name526 = cname + "=";
+  var ca = document.cookie.split(';');
+  var i=0;
+  for(var E = 0; i < ca.length; E++) {
+    var a1 = ca[E];
+    while (a1.charAt(0) == ' ') {
+      a1 = a1.substring(1);
+    }
+    if (a1.indexOf(name526) == 0) {
+      return a1.substring(name526.length, a1.length);
+    }
+  }
+  return "";
+}
+function checkCookie(cname) {
+  if (getCookie(cname) !== undefined) {
+    return true
+  } else {
+    return false
+  }
+  }
+    if(getCookie('loged')=='1'){
+      document.body.innerHTML += '<form action="/cgi-bin/shtdown.sh"><input type="submit" value="Shutdown server button"></form><form action="/cgi-bin/restart.sh"><input type="submit" value="Restart server button"></form>'
+      }else{
+        document.body.innerHTML = '</br><p>NO SE HA LOGEADO CORRECTAMENTE</p><p><button id=\"myButton9\" class=\"float-left submit-button\" >Login</button></p>';
+        document.getElementById("myButton9").onclick = function () {
+            location.href = "http://172.20.10.6/";
+        };
+      }
+      </script>
+</body>
+</html>

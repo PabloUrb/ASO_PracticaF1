@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Strict//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title> Pagina Web d'ADS </title>
+</head>
+<body>
+<h3>Plana panel de Control</h3>
+
+
+
+
+<script type="text/javascript">
+function getCookie(cname) {
+  var name526 = cname + "=";
+  var ca = document.cookie.split(';');
+  var i=0;
+  for(var E = 0; i < ca.length; E++) {
+    var a1 = ca[E];
+    while (a1.charAt(0) == ' ') {
+      a1 = a1.substring(1);
+    }
+    if (a1.indexOf(name526) == 0) {
+      return a1.substring(name526.length, a1.length);
+    }
+  }
+  return "";
+}
+function checkCookie(cname) {
+  if (getCookie(cname) !== undefined) {
+    return true
+  } else {
+    return false
+  }
+  }
+    if(getCookie('loged')=='1'){
+      document.body.innerHTML += '<p><button id="myButton1" class="float-left submit-button" >Gestion de procesos</button></p><p><button id="myButton2" class="float-left submit-button" >Monitoritzacio</button></p><p><button id="myButton3" class="float-left submit-button" >Apagar - Reiniciar</button></p><p><button id="myButton4" class="float-left submit-button" >Gestio de logs</button></p><p><button id="myButton5" class="float-left submit-button" >Gestio dusuaris</button></p><p><button id="myButton6" class="float-left submit-button" >Filtrat de paquets</button></p><p><button id="myButton7" class="float-left submit-button" >Gestio de tasques preprogramades</button></p><p><button id="myButton8" class="float-left submit-button" >Funcionalitats musicals</button></p>';
+      document.getElementById("myButton1").onclick = function () {
+          location.href = "http://172.20.10.6/cgi-bin/gestionProcesos.sh";
+      };
+      document.getElementById("myButton2").onclick = function () {
+          location.href = "http://172.20.10.6/cgi-bin/monitoritzacio.sh";
+      };
+      document.getElementById("myButton3").onclick = function () {
+          location.href = "http://172.20.10.6/apagarReiniciar.html";
+      };
+      document.getElementById("myButton4").onclick = function () {
+          location.href = "http://172.20.10.6/cgi-bin/test.sh";
+      };
+      document.getElementById("myButton5").onclick = function () {
+          location.href = "http://172.20.10.6/cgi-bin/GestionUsuarios.sh";
+      };
+      document.getElementById("myButton6").onclick = function () {
+          location.href = "http://172.20.10.6/cgi-bin/filtratPaquetes.sh";
+      };
+      document.getElementById("myButton7").onclick = function () {
+          location.href = "http://172.20.10.6/cgi-bin/GestionTareasProgramadas.sh";
+      };
+      document.getElementById("myButton8").onclick = function () {
+          location.href = "http://172.20.10.6/cgi-bin/funcionalidadesMusicales.sh";
+      };
+    }else{
+      document.body.innerHTML = '</br><p>NO SE HA LOGEADO CORRECTAMENTE</p><p><button id=\"myButton9\" class=\"float-left submit-button\" >Login</button></p>';
+      document.getElementById("myButton9").onclick = function () {
+          location.href = "http://172.20.10.6/";
+      };
+    }
+
+
+
+
+
+
+
+
+
+
+</script>
+</body>
+</html>
